@@ -1,0 +1,59 @@
+body {
+    background-color: #ffeef2;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+}
+
+.container {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    text-align: center;
+    width: 350px;
+    position: relative;
+}
+
+.emoji { font-size: 50px; margin-bottom: 20px; }
+
+h1 { font-size: 24px; color: #333; margin-bottom: 30px; }
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    height: 60px;
+    align-items: center;
+}
+
+button {
+    padding: 12px 25px;
+    font-size: 18px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+#yes-btn {
+    background-color: #e91e63;
+    color: white;
+    font-weight: bold;
+}
+
+#no-btn {
+    background-color: #f0f0f0;
+    color: #666;
+    position: relative; /* Important for the dodge effect */
+}
+
+.sub-text { margin-top: 20px; color: #ff8fa3; font-style: italic; font-size: 14px; }
+
+.hidden { display: none; }
+
+img { width: 100%; border-radius: 10px; margin-top: 15px; }
