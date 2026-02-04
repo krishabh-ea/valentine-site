@@ -3,27 +3,127 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Be My Valentine?</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Valentine's Surprise</title>
+    <style>
+        body {
+            background-color: #ffeef2;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            text-align: center;
+            width: 350px;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        /* Step 1: Name Input Styling */
+        input {
+            padding: 12px;
+            border: 2px solid #ff4d6d;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            outline: none;
+            font-size: 16px;
+        }
+        /* Button Styling */
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+            position: relative;
+            height: 50px;
+        }
+        button {
+            padding: 10px 25px;
+            font-size: 16px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .primary-btn { background-color: #ff4d6d; color: white; }
+        #no-btn { background-color: #f0f0f0; color: #555; z-index: 10; }
+        
+        .hidden { display: none; }
+        img { width: 100%; border-radius: 10px; margin-top: 10px; }
+        h1 { font-size: 22px; color: #333; }
+    </style>
 </head>
 <body>
+
     <div class="container">
-        <div id="question-section">
-            <div class="emoji">🐱❤️</div>
-            <h1 id="question-text">Manisha, will you be my valentine?</h1>
-            <div class="buttons">
-                <button id="yes-btn">Yes 💖</button>
-                <button id="no-btn">No 🙈</button>
-            </div>
-            <p id="message" class="sub-text">"No" seems a bit shy</p>
+        <div id="name-step">
+            <h1>Who is this for? ❤️</h1>
+            <input type="text" id="name-input" placeholder="Enter name here..." autofocus>
+            <br>
+            <button class="primary-btn" onclick="startQuestion()">Next</button>
         </div>
 
-        <div id="success-section" class="hidden">
-            <h1 class="success-title">It's a date then!</h1>
-            <p>Knew you'd say yes</p>
-            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYzF0YWl1NnZ6Y3Z4cXp3M2Q1bzl3ZjRqbGRteDk4OHRoc2NrdnRoaCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/K9Vz4hGu2iDPW/giphy.gif" alt="Celebration GIF">
+        <div id="question-step" class="hidden">
+            <h1 id="question-text">, will you be my valentine? 🌹</h1>
+            <div class="buttons">
+                <button id="yes-btn" class="primary-btn">Yes!</button>
+                <button id="no-btn">No</button>
+            </div>
+        </div>
+
+        <div id="success-step" class="hidden">
+            <h1>Yay! See you then! ❤️</h1>
+            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3V1aThqZmVvYnNocjZoc3pnenhsdGJqYTlkdm84ZnVvbWlwd3BzbCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/o3QqetyukPqOCIZ2Sc/giphy.gif">
         </div>
     </div>
-    <script src="script.js"></script>
+
+    <script>
+        const nameStep = document.getElementById('name-step');
+        const questionStep = document.getElementById('question-step');
+        const successStep = document.getElementById('success-step');
+        const nameInput = document.getElementById('name-input');
+        const questionText = document.getElementById('question-text');
+        const noBtn = document.getElementById('no-btn');
+        const yesBtn = document.getElementById('yes-btn');
+
+        // Transition from Name to Question
+        function startQuestion() {
+            const name = nameInput.value.trim();
+            if (name === "") {
+                alert("Please enter a name! 😊");
+                return;
+            }
+            questionText.innerText = name + questionText.innerText;
+            nameStep.classList.add('hidden');
+            questionStep.classList.remove('hidden');
+        }
+
+        // Logic for the dodging button
+        noBtn.addEventListener('mouseover', () => {
+            // Calculate random position
+            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+            
+            // Set to absolute only when hovered so it starts in the correct place
+            noBtn.style.position = 'fixed'; 
+            noBtn.style.left = x + 'px';
+            noBtn.style.top = y + 'px';
+        });
+
+        // Show success screen
+        yesBtn.addEventListener('click', () => {
+            questionStep.classList.add('hidden');
+            successStep.classList.remove('hidden');
+            noBtn.style.display = 'none'; // Completely remove no button
+        });
+    </script>
 </body>
 </html>
