@@ -65,7 +65,7 @@
 
     <div class="container">
         <div id="name-step">
-            <h1>Who is this for? ❤️</h1>
+            <h1>Your Name? ❤️</h1>
             <input type="text" id="name-input" placeholder="Enter name here..." autofocus>
             <br>
             <button class="primary-btn" onclick="startQuestion()">Next</button>
@@ -80,8 +80,8 @@
         </div>
 
         <div id="success-step" class="hidden">
-            <h1>Yay! See you then! ❤️</h1>
-            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3V1aThqZmVvYnNocjZoc3pnenhsdGJqYTlkdm84ZnVvbWlwd3BzbCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/o3QqetyukPqOCIZ2Sc/giphy.gif">
+            <h1>Hahahaha!</h1>
+            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMnBzejBzZnoyc3YxdjNtNjkybnd4NXBjbWVsNG0ycmNkd28ydGtxMSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/N9xBWr21AcmAM/giphy.gif">
         </div>
     </div>
 
@@ -93,8 +93,18 @@
         const questionText = document.getElementById('question-text');
         const noBtn = document.getElementById('no-btn');
         const yesBtn = document.getElementById('yes-btn');
+        const funnyMessage = document.getElementById('funny-message');
 
-        // Transition from Name to Question
+        const responses = [
+            "Haha, nice try!",
+            "You can't escape love!",
+            "Just say Yes already!",
+            "Are you sure?",
+            "Think again! 😉",
+            "Still trying? 😂",
+            "Persistence is key, but I'm faster!"
+        ];
+
         function startQuestion() {
             const name = nameInput.value.trim();
             if (name === "") {
@@ -106,23 +116,23 @@
             questionStep.classList.remove('hidden');
         }
 
-        // Logic for the dodging button
         noBtn.addEventListener('mouseover', () => {
-            // Calculate random position
+            // 1. Move the button
             const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
             const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
-            
-            // Set to absolute only when hovered so it starts in the correct place
             noBtn.style.position = 'fixed'; 
             noBtn.style.left = x + 'px';
             noBtn.style.top = y + 'px';
+
+            // 2. Change the message
+            const randomMsg = responses[Math.floor(Math.random() * responses.length)];
+            funnyMessage.innerText = randomMsg;
         });
 
-        // Show success screen
         yesBtn.addEventListener('click', () => {
             questionStep.classList.add('hidden');
             successStep.classList.remove('hidden');
-            noBtn.style.display = 'none'; // Completely remove no button
+            noBtn.style.display = 'none';
         });
     </script>
 </body>
